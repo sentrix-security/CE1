@@ -1,0 +1,1 @@
+Code = gInt() - _KeyOP2;
