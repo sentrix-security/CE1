@@ -1,0 +1,32 @@
+{
+  "name": "ce1",
+  "version": "1.0.0",
+  "description": "CE1 is made as an extra layer to VM obfuscation. In a day and age where VM lua obfuscation is slowly becoming less secure, we have decided to make a tool where you can add an extra layer of protection onto your scripts. This may decrease performance a little, however in the long run it helps create a secure shield onto your scripts.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NotDSF/CE1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NotDSF/CE1/issues"
+  },
+  "homepage": "https://github.com/NotDSF/CE1#readme",
+  "dependencies": {
+    "discord.js": "^13.5.0",
+    "express": "^4.17.2",
+    "express-rate-limit": "^6.0.5",
+    "gojs": "^2.2.0",
+    "luamin": "^1.0.4",
+    "luaparse": "^0.3.1",
+    "mongodb": "^4.3.0",
+    "node-fetch": "^2.6.1",
+    "puppeteer": "^13.1.2",
+    "random": "^3.0.6"
+  }
+}
