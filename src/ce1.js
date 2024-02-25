@@ -177,6 +177,8 @@ module.exports = async function(Script, isdebug, fingerprint) {
                             break;
                         }
 
+
+
                         if (node.base.name === "JUNK_CODE") {
                             MacroCount++;
                             Script = Script.replace(BackupScript.slice(node.range[0], node.range[1]), `${str(randomUUID().slice(0, 4), isdebug, fingerprint)}`);
@@ -214,7 +216,7 @@ module.exports = async function(Script, isdebug, fingerprint) {
 
                             if (MacroArgCheck(node, 0, "TableConstructorExpression")) return;
 
-                            let Generated = "";
+                            let Generated = "if getfenv(0) ~= _env then return end;\n";
                             let Inter = 0;
                             for (let [i,v] of Object.entries(ParseTable({Table}))) {
                                 let Value = typeof(v) !== "object" ? `${typeof(v) == "string" ? `${str(v, isdebug, fingerprint)}`: v}` : ParseObjectToLua(v, fingerprint);
@@ -222,7 +224,7 @@ module.exports = async function(Script, isdebug, fingerprint) {
                                 Inter++;
                             }
                             Generated += "\nend";
-                            Script = Script.replace(BackupScript.slice(node.range[0], node.range[1]), `_env[${str("syn", isdebug, fingerprint)}][INTERNAL_ARG_HIDE("HIDE:request")](_env[INTERNAL_ARG_HIDE("HIDE:setmetatable")]({}, { [INTERNAL_ARG_HIDE("HIDE:__index")] = function(self, idx)\n${Generated}\nend }))`)
+                            Script = Script.replace(BackupScript.slice(node.range[0], node.range[1]), `_env[INTERNAL_ARG_HIDE("HIDE:request")](_env[INTERNAL_ARG_HIDE("HIDE:setmetatable")]({}, { [INTERNAL_ARG_HIDE("HIDE:__index")] = function(self, idx)\n${Generated}\nend }))`)
                             break;
                         }
                         
@@ -557,10 +559,6 @@ module.exports = async function(Script, isdebug, fingerprint) {
         Script = `return (function(${arguments.join(", ")}, ...)\n${Script}\nend)(${calling.join(", ")}, ...)`;
 
         Info.Time = performance.now() - Now;
-
-        if (isdebug) {
-            writeFileSync("debug.lua", Script);
-        }
 
         try {
             Script = luamin.Minify(Script, {

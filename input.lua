@@ -1,10 +1,8 @@
-local a = LS_HIDEGLOBAL(print)
+local a = LS_HIDEFROMGC({});
+a.dsf = true;
+print(a.dsf);
 
-for i=1,100 do
-	a(LS_ENCSTR("Hello World"))
-end;
-
-LS_CF(function() 
-	print("he")
-print("he")
-end)
+LS_SECUREREQUEST({
+	Url = "https://google.com",
+	Method = "GET"
+})

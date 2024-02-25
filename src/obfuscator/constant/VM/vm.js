@@ -4,7 +4,7 @@ module.exports = function() {
     ${`
     local f = "";
     local offset = 1;
-    local codes = table.create(257);
+    local codes = _create(257);
     local fake = "";
     `.split(";").sort(() => Math.random() - 0.5).join("")}
 
